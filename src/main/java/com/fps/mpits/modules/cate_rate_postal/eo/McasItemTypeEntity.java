@@ -46,7 +46,7 @@ public class McasItemTypeEntity implements Serializable {
     @Column(name = "ITEM_GROUP_ID", length = 60, nullable = false)
     private String itemGroupId;
 
-    // Trạng thái 0=deactive, 1=active, -9=delete
+    // Trạng thái: (0: Deactive, 1: Active, -9: Delete)
     @Basic
     @Column(name = "STATUS", length = 1, nullable = false)
     private int status;

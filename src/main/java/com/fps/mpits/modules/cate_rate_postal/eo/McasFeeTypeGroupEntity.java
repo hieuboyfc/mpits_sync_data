@@ -29,18 +29,18 @@ public class McasFeeTypeGroupEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    // Mã nhóm loại phí
+    // Mã nhóm cước
     @Basic
     @Id
     @Column(name = "FEE_TYPE_GROUP_ID", length = 10, nullable = false)
     private String feeTypeGroupId;
 
-    // Tên nhóm loại phí
+    // Tên nhóm cước
     @Basic
     @Column(name = "FEE_TYPE_GROUP_NAME", length = 60, nullable = false)
     private String feeTypeGroupName;
 
-    // Trạng thái 0=deactive, 1=active, -9=delete
+    // Trạng thái: (0: Deactive, 1: Active, -9: Delete)
     @Basic
     @Column(name = "STATUS", length = 1, nullable = false)
     private int status;

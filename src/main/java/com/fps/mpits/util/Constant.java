@@ -47,6 +47,7 @@ public class Constant {
         public static final String MCAS_FEE_TYPE = "MCAS_FEE_TYPE";
         public static final String MCAS_FEE_TYPE_GROUP = "MCAS_FEE_TYPE_GROUP";
         public static final String MCAS_SERVICE = "MCAS_SERVICE";
+        public static final String MCAS_SERVICE_GROUP = "MCAS_SERVICE_GROUP";
         public static final String MCAS_SERVICE_VAS = "MCAS_SERVICE_VAS";
         public static final String MCAS_VA_SERVICE = "MCAS_VA_SERVICE";
         public static final String MCAS_UOM = "MCAS_UOM";

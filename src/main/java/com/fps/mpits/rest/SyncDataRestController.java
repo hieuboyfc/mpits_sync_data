@@ -142,6 +142,9 @@ public class SyncDataRestController {
                 case Constant.EntityTable.MCAS_SERVICE:
                     objEntity = Jackson.getInstance().string2Object(item.listData(), McasServiceEntity.class);
                     break;
+                case Constant.EntityTable.MCAS_SERVICE_GROUP:
+                    objEntity = Jackson.getInstance().string2Object(item.listData(), McasServiceGroupEntity.class);
+                    break;
                 case Constant.EntityTable.MCAS_VA_SERVICE:
                     objEntity = Jackson.getInstance().string2Object(item.listData(), McasVaServiceEntity.class);
                     break;

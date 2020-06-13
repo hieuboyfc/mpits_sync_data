@@ -27,7 +27,7 @@ public class Common {
         return stringWriter.toString();
     }
 
-    public static String getPasswordWithSalt(String username, String rawPassword) {
+    static String getPasswordWithSalt(String username, String rawPassword) {
         return String.format("%s ~!@#$%%^&*()_+ %s", username, rawPassword);
     }
 

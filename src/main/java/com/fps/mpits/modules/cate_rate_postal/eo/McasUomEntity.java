@@ -40,7 +40,7 @@ public class McasUomEntity implements Serializable {
     @Column(name = "UOM_NAME", length = 20, nullable = false)
     private String uomName;
 
-    // Trạng thái 0=deactive, 1=active, -9=delete
+    // Trạng thái: (0: Deactive, 1: Active, -9: Delete)
     @Basic
     @Column(name = "STATUS", length = 1, nullable = false)
     private int status;

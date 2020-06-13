@@ -37,13 +37,13 @@ public class McasServiceVasEntity implements Serializable {
     @Column(name = "VA_SERVICE_ID", length = 100, nullable = false)
     private String vaServiceId;
 
-    // Mã dịch vụ
+    // Mã sản phẩm dịch vụ
     @Basic
     @Id
     @Column(name = "MAIL_SERVICE_ID", length = 10, nullable = false)
     private String mailServiceId;
 
-    // Trạng thái 0=deactive, 1=active, -9=delete
+    // Trạng thái: (0: Deactive, 1: Active, -9: Delete)
     @Basic
     @Column(name = "STATUS", length = 1)
     private int status;

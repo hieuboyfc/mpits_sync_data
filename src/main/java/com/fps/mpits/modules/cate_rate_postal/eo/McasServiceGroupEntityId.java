@@ -10,7 +10,6 @@ import lombok.experimental.Accessors;
 import javax.persistence.Embeddable;
 import java.io.Serializable;
 
-
 /**
  * @author HieuDT28 (Hiếu Boy) - 19/05/2020
  */
@@ -21,14 +20,14 @@ import java.io.Serializable;
 @AllArgsConstructor
 @JsonAutoDetect(fieldVisibility = Visibility.ANY)
 @Embeddable
-public class McasServiceVasEntityId implements Serializable {
+public class McasServiceGroupEntityId implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    // Mã dịch vụ GTGT
-    private String vaServiceId;
+    // Mã nhóm dịch vụ
+    private String serviceGroupId;
 
-    // Mã sản phẩm dịch vụ
-    private String mailServiceId;
+    // Nghiệp vụ (01 - DVBC, 02 - TCBC, 03 - PHBC, 04 - Phân phối hàng hóa)
+    private String serviceReport;
 
 }

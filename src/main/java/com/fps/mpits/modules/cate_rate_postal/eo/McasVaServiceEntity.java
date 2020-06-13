@@ -41,7 +41,12 @@ public class McasVaServiceEntity implements Serializable {
     @Column(name = "VA_SERVICE_NAME", length = 100, nullable = false)
     private String vaServiceName;
 
-    // Trạng thái 0=deactive, 1=active, -9=delete
+    // Mã nhóm cước
+    @Basic
+    @Column(name = "FEE_TYPE_GROUP_ID", length = 20, nullable = false)
+    private String feeTypeGroupId;
+
+    // Trạng thái: (0: Deactive, 1: Active, -9: Delete)
     @Basic
     @Column(name = "STATUS", length = 1, nullable = false)
     private int status;
@@ -67,6 +72,9 @@ public class McasVaServiceEntity implements Serializable {
     @Basic
     @Column(name = "UPDATEDBY")
     private String updatedBy;
+
+    @Transient
+    private McasFeeTypeGroupEntity mcasFeeTypeGroupEntity;
 
     @Transient
     private McasListApproveDataEntity objMcasListApproveDataEntity;
