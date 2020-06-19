@@ -4,10 +4,7 @@ import com.fps.mpits.exception.BadRequestException;
 import com.fps.mpits.exception.NotAcceptableException;
 import com.fps.mpits.modules.app.eo.McasApplicationEntity;
 import com.fps.mpits.modules.app.eo.McasListApproveDataEntity;
-import com.fps.mpits.modules.auth.eo.McasEmployeeEntity;
-import com.fps.mpits.modules.auth.eo.McasUserAppEntity;
-import com.fps.mpits.modules.auth.eo.McasUserAppStatusEntity;
-import com.fps.mpits.modules.auth.eo.McasUserEntity;
+import com.fps.mpits.modules.auth.eo.*;
 import com.fps.mpits.modules.cate.eo.*;
 import com.fps.mpits.modules.cate_rate_postal.eo.*;
 import com.fps.mpits.request.RequestClientInfo;
@@ -29,7 +26,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -78,6 +74,9 @@ public class SyncDataRestController {
                     break;
                 case Constant.EntityTable.MCAS_USER:
                     objEntity = Jackson.getInstance().string2Object(item.listData(), McasUserEntity.class);
+                    break;
+                case Constant.EntityTable.MCAS_USER_GROUP:
+                    objEntity = Jackson.getInstance().string2Object(item.listData(), McasUserGroupEntity.class);
                     break;
                 case Constant.EntityTable.MCAS_USER_APP:
                     objEntity = Jackson.getInstance().string2Object(item.listData(), McasUserAppEntity.class);

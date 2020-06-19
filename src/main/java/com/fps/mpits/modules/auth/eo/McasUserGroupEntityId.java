@@ -11,7 +11,7 @@ import javax.persistence.Embeddable;
 import java.io.Serializable;
 
 /**
- * @author HieuDT28 (Hiếu Boy) - 19/05/2020
+ * @author HieuDT28 (Hiếu Boy) - 19/06/2020
  * @see <a href="https://www.objectdb.com/java/jpa/entity/id">https://www.objectdb.com/java/jpa/entity/id</a>
  */
 
@@ -21,7 +21,7 @@ import java.io.Serializable;
 @Data
 @JsonAutoDetect(fieldVisibility = Visibility.ANY)
 @Embeddable
-public class McasGroupEntityId implements Serializable {
+public class McasUserGroupEntityId implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -30,5 +30,12 @@ public class McasGroupEntityId implements Serializable {
 
     // Mã nhóm người dùng
     private String groupCode;
-    
+
+    // Mã đơn vị
+    private String orgCode;
+
+    // Tên đăng nhập
+    private String username;
+
+
 }

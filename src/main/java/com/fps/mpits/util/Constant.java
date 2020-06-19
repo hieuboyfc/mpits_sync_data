@@ -22,6 +22,7 @@ public class Constant {
         // BEGIN AUTH
         public static final String MCAS_GROUP = "MCAS_GROUP";
         public static final String MCAS_USER = "MCAS_USER";
+        public static final String MCAS_USER_GROUP = "MCAS_USER_GROUP";
         public static final String MCAS_USER_APP = "MCAS_USER_APP";
         public static final String MCAS_USER_APP_STATUS = "MCAS_USER_APP_STATUS";
         // END AUTH
