@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
+import org.apache.commons.lang3.SerializationUtils;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -50,48 +51,12 @@ public class McasExchangeEntity implements Serializable {
     @Temporal(TemporalType.DATE)
     private Date createdDate;
 
-    // Trạng thái 0=deactive, 1=active, -9=delete
+    // Trạng thái: (0: Deactive, 1: Active, -9: Delete)
     @Basic
     @Column(name = "STATUS")
     private int status;
 
-    public String getCode() {
-        return code;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public boolean isAutoSync() {
-        return autoSync;
-    }
-
-    public void setAutoSync(boolean autoSync) {
-        this.autoSync = autoSync;
-    }
-
-    public Date getCreatedDate() {
-        return createdDate;
-    }
-
-    public void setCreatedDate(Date createdDate) {
-        this.createdDate = createdDate;
-    }
-
-    public int getStatus() {
-        return status;
-    }
-
-    public void setStatus(int status) {
-        this.status = status;
+    public McasExchangeEntity cloneNotRef() {
+        return SerializationUtils.clone(this);
     }
 }

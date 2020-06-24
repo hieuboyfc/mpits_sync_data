@@ -8,6 +8,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
+import org.apache.commons.lang3.SerializationUtils;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -54,44 +55,7 @@ public class McasUserAppEntity implements Serializable {
     @Transient
     private List<McasEmployeeEntity> lstMcasEmployeeEntity;
 
-
-    public String getAppCode() {
-        return appCode;
-    }
-
-    public void setAppCode(String appCode) {
-        this.appCode = appCode;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public int getStatus() {
-        return status;
-    }
-
-    public void setStatus(int status) {
-        this.status = status;
-    }
-
-    public List<McasUserEntity> getLstMcasUserEntity() {
-        return lstMcasUserEntity;
-    }
-
-    public void setLstMcasUserEntity(List<McasUserEntity> lstMcasUserEntity) {
-        this.lstMcasUserEntity = lstMcasUserEntity;
-    }
-
-    public List<McasEmployeeEntity> getLstMcasEmployeeEntity() {
-        return lstMcasEmployeeEntity;
-    }
-
-    public void setLstMcasEmployeeEntity(List<McasEmployeeEntity> lstMcasEmployeeEntity) {
-        this.lstMcasEmployeeEntity = lstMcasEmployeeEntity;
+    public McasUserAppEntity cloneNotRef() {
+        return SerializationUtils.clone(this);
     }
 }

@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
+import org.apache.commons.lang3.SerializationUtils;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -57,67 +58,12 @@ public class McasExchangeRateEntity implements Serializable {
     @Temporal(TemporalType.DATE)
     private Date createdDate;
 
-    // Trạng thái 0=deactive, 1=active, -9=delete
+    // Trạng thái: (0: Deactive, 1: Active, -9: Delete)
     @Basic
     @Column(name = "STATUS")
     private int status;
 
-    @Transient
-    private String exchangeName;
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public String getExchangeCode() {
-        return exchangeCode;
-    }
-
-    public void setExchangeCode(String exchangeCode) {
-        this.exchangeCode = exchangeCode;
-    }
-
-    public String getExchangedCode() {
-        return exchangedCode;
-    }
-
-    public void setExchangedCode(String exchangedCode) {
-        this.exchangedCode = exchangedCode;
-    }
-
-    public Double getRate() {
-        return rate;
-    }
-
-    public void setRate(Double rate) {
-        this.rate = rate;
-    }
-
-    public Date getCreatedDate() {
-        return createdDate;
-    }
-
-    public void setCreatedDate(Date createdDate) {
-        this.createdDate = createdDate;
-    }
-
-    public int getStatus() {
-        return status;
-    }
-
-    public void setStatus(int status) {
-        this.status = status;
-    }
-
-    public String getExchangeName() {
-        return exchangeName;
-    }
-
-    public void setExchangeName(String exchangeName) {
-        this.exchangeName = exchangeName;
+    public McasExchangeRateEntity cloneNotRef() {
+        return SerializationUtils.clone(this);
     }
 }

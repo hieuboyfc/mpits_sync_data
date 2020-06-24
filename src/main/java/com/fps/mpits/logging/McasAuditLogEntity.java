@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
+import org.apache.commons.lang3.SerializationUtils;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -24,9 +25,10 @@ import java.util.Date;
 @Data
 @JsonAutoDetect(fieldVisibility = Visibility.ANY)
 public class McasAuditLogEntity implements Serializable {
+
     private static final long serialVersionUID = 1L;
 
-    // ID
+    // ID Log
     @Basic
     @Id
     @SequenceGenerator(name = "SequenceIdGenerator", sequenceName = "SEQ_MCAS_AUDIT_LOG", allocationSize = 1)
@@ -94,4 +96,8 @@ public class McasAuditLogEntity implements Serializable {
     @Basic
     @Column(name = "URL_REFERER")
     private String urlReferer;
+
+    public McasAuditLogEntity cloneNotRef() {
+        return SerializationUtils.clone(this);
+    }
 }

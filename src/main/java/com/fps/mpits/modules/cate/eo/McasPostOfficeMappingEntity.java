@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
+import org.apache.commons.lang3.SerializationUtils;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -43,28 +44,8 @@ public class McasPostOfficeMappingEntity implements Serializable {
     @Column(name = "N_ORGCODE", length = 50)
     private String orgCode;
 
-    public String getPosCode() {
-        return posCode;
-    }
-
-    public void setPosCode(String posCode) {
-        this.posCode = posCode;
-    }
-
-    public String getPostCode() {
-        return postCode;
-    }
-
-    public void setPostCode(String postCode) {
-        this.postCode = postCode;
-    }
-
-    public String getOrgCode() {
-        return orgCode;
-    }
-
-    public void setOrgCode(String orgCode) {
-        this.orgCode = orgCode;
+    public McasPostOfficeMappingEntity cloneNotRef() {
+        return SerializationUtils.clone(this);
     }
 }
 

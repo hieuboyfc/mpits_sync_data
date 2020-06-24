@@ -8,6 +8,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
+import org.apache.commons.lang3.SerializationUtils;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -58,5 +59,9 @@ public class McasUserGroupEntity implements Serializable {
     @Basic
     @Column(name = "STATUS")
     private int status;
+
+    public McasUserGroupEntity cloneNotRef() {
+        return SerializationUtils.clone(this);
+    }
 
 }

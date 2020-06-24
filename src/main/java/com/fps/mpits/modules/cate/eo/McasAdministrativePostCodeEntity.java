@@ -49,50 +49,10 @@ public class McasAdministrativePostCodeEntity implements Serializable {
     @Column(name = "OLD_POSTAL_CODE")
     private String oldPostalCode;
 
-    // Trạng thái 0=deactive, 1=active, -9=delete
+    // Trạng thái: (0: Deactive, 1: Active, -9: Delete)
     @Basic
     @Column(name = "STATUS")
     private int status;
-
-    public String getAdministrativeCode() {
-        return administrativeCode;
-    }
-
-    public void setAdministrativeCode(String administrativeCode) {
-        this.administrativeCode = administrativeCode;
-    }
-
-    public String getPostalCode() {
-        return postalCode;
-    }
-
-    public void setPostalCode(String postalCode) {
-        this.postalCode = postalCode;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public String getOldPostalCode() {
-        return oldPostalCode;
-    }
-
-    public void setOldPostalCode(String oldPostalCode) {
-        this.oldPostalCode = oldPostalCode;
-    }
-
-    public int getStatus() {
-        return status;
-    }
-
-    public void setStatus(int status) {
-        this.status = status;
-    }
 
     public McasAdministrativePostCodeEntity cloneNotRef() {
         return SerializationUtils.clone(this);

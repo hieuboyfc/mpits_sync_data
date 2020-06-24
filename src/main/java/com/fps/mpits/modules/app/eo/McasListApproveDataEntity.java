@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
+import org.apache.commons.lang3.SerializationUtils;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -171,6 +172,10 @@ public class McasListApproveDataEntity implements Serializable {
 
     public void setObjEntity(Object objEntity) {
         this.objEntity = objEntity;
+    }
+
+    public McasListApproveDataEntity cloneNotRef() {
+        return SerializationUtils.clone(this);
     }
 
 }

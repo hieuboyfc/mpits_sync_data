@@ -87,12 +87,6 @@ public class SyncDataRestController {
                 case Constant.EntityTable.MCAS_ROLE:
                     objEntity = Jackson.getInstance().string2Object(item.listData(), McasRoleEntity.class);
                     break;
-                case Constant.EntityTable.MCAS_ADMINISTRATIVE_UNIT:
-                    objEntity = Jackson.getInstance().string2Object(item.listData(), McasAdministrativeUnitEntity.class);
-                    break;
-                case Constant.EntityTable.MCAS_NATIONAL_POSTAL:
-                    objEntity = Jackson.getInstance().string2Object(item.listData(), McasNationalPostalEntity.class);
-                    break;
                 case Constant.EntityTable.MCAS_ORGANIZATION:
                     objEntity = Jackson.getInstance().string2Object(item.listData(), McasOrganizationEntity.class);
                     break;
@@ -101,6 +95,9 @@ public class SyncDataRestController {
                     break;
                 case Constant.EntityTable.MCAS_ORGANIZATION_TYPE:
                     objEntity = Jackson.getInstance().string2Object(item.listData(), McasOrganizationTypeEntity.class);
+                    break;
+                case Constant.EntityTable.MCAS_ADMINISTRATIVE_UNIT:
+                    objEntity = Jackson.getInstance().string2Object(item.listData(), McasAdministrativeUnitEntity.class);
                     break;
                 case Constant.EntityTable.MCAS_ADMINISTRATIVE_POSTCODE:
                     objEntity = Jackson.getInstance().string2Object(item.listData(), McasAdministrativePostCodeEntity.class);
@@ -113,6 +110,9 @@ public class SyncDataRestController {
                     break;
                 case Constant.EntityTable.MCAS_NATIONAL_CITY:
                     objEntity = Jackson.getInstance().string2Object(item.listData(), McasNationalCityEntity.class);
+                    break;
+                case Constant.EntityTable.MCAS_NATIONAL_POSTAL:
+                    objEntity = Jackson.getInstance().string2Object(item.listData(), McasNationalPostalEntity.class);
                     break;
                 case Constant.EntityTable.MCAS_EXCHANGE:
                     objEntity = Jackson.getInstance().string2Object(item.listData(), McasExchangeEntity.class);

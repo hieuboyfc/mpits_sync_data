@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
+import org.apache.commons.lang3.SerializationUtils;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -49,70 +50,22 @@ public class McasNationalCityEntity implements Serializable {
     @Temporal(TemporalType.DATE)
     private Date createdDate;
 
-    // Trạng thái 0=deactive, 1=active, -9=delete
+    // Trạng thái: (0: Deactive, 1: Active, -9: Delete)
     @Basic
     @Column(name = "STATUS")
     private int status;
 
-    @Transient
-    McasNationalEntity objMcasNationalEntity;
+    // Vùng xa cho HTTC (1 - Có)
+    @Basic
+    @Column(name = "IS_FAR", length = 1)
+    private Integer isFar;
 
-    @Transient
-    String nationalName;
+    // Trung tâm cho HTTC (1 - Có)
+    @Basic
+    @Column(name = "IS_CENTER", length = 1)
+    private Integer isCenter;
 
-    public String getCode() {
-        return code;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getNationalCode() {
-        return nationalCode;
-    }
-
-    public void setNationalCode(String nationalCode) {
-        this.nationalCode = nationalCode;
-    }
-
-    public Date getCreatedDate() {
-        return createdDate;
-    }
-
-    public void setCreatedDate(Date createdDate) {
-        this.createdDate = createdDate;
-    }
-
-    public int getStatus() {
-        return status;
-    }
-
-    public void setStatus(int status) {
-        this.status = status;
-    }
-
-    public McasNationalEntity getObjMcasNationalEntity() {
-        return objMcasNationalEntity;
-    }
-
-    public void setObjMcasNationalEntity(McasNationalEntity objMcasNationalEntity) {
-        this.objMcasNationalEntity = objMcasNationalEntity;
-    }
-
-    public String getNationalName() {
-        return nationalName;
-    }
-
-    public void setNationalName(String nationalName) {
-        this.nationalName = nationalName;
+    public McasNationalCityEntity cloneNotRef() {
+        return SerializationUtils.clone(this);
     }
 }

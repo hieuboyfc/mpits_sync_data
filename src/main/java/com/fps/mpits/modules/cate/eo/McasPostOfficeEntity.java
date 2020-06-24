@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
+import org.apache.commons.lang3.SerializationUtils;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -83,7 +84,7 @@ public class McasPostOfficeEntity implements Serializable {
     @Column(name = "COMMUNENAME")
     private String communeName;
 
-    // Trạng thái 0=deactive, 1=active, -9=delete
+    // Trạng thái: (0: Deactive, 1: Active, -9: Delete)
     @Basic
     @Column(name = "STATUS")
     private int status;
@@ -98,126 +99,7 @@ public class McasPostOfficeEntity implements Serializable {
     @Column(name = "UNITNAME")
     private String unitName;
 
-    @Transient
-    private McasPostOfficeMappingEntity objMcasPostOfficeMappingEntity;
-
-    public String getPosCode() {
-        return posCode;
-    }
-
-    public void setPosCode(String posCode) {
-        this.posCode = posCode;
-    }
-
-    public String getPosName() {
-        return posName;
-    }
-
-    public void setPosName(String posName) {
-        this.posName = posName;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public String getPosLevelCode() {
-        return posLevelCode;
-    }
-
-    public void setPosLevelCode(String posLevelCode) {
-        this.posLevelCode = posLevelCode;
-    }
-
-    public String getPosLevelName() {
-        return posLevelName;
-    }
-
-    public void setPosLevelName(String posLevelName) {
-        this.posLevelName = posLevelName;
-    }
-
-    public String getProvinceCode() {
-        return provinceCode;
-    }
-
-    public void setProvinceCode(String provinceCode) {
-        this.provinceCode = provinceCode;
-    }
-
-    public String getProvinceName() {
-        return provinceName;
-    }
-
-    public void setProvinceName(String provinceName) {
-        this.provinceName = provinceName;
-    }
-
-    public String getDistrictCode() {
-        return districtCode;
-    }
-
-    public void setDistrictCode(String districtCode) {
-        this.districtCode = districtCode;
-    }
-
-    public String getDistrictName() {
-        return districtName;
-    }
-
-    public void setDistrictName(String districtName) {
-        this.districtName = districtName;
-    }
-
-    public String getCommuneCode() {
-        return communeCode;
-    }
-
-    public void setCommuneCode(String communeCode) {
-        this.communeCode = communeCode;
-    }
-
-    public String getCommuneName() {
-        return communeName;
-    }
-
-    public void setCommuneName(String communeName) {
-        this.communeName = communeName;
-    }
-
-    public int getStatus() {
-        return status;
-    }
-
-    public void setStatus(int status) {
-        this.status = status;
-    }
-
-    public String getUnitCode() {
-        return unitCode;
-    }
-
-    public void setUnitCode(String unitCode) {
-        this.unitCode = unitCode;
-    }
-
-    public String getUnitName() {
-        return unitName;
-    }
-
-    public void setUnitName(String unitName) {
-        this.unitName = unitName;
-    }
-
-    public McasPostOfficeMappingEntity getObjMcasPostOfficeMappingEntity() {
-        return objMcasPostOfficeMappingEntity;
-    }
-
-    public void setObjMcasPostOfficeMappingEntity(McasPostOfficeMappingEntity objMcasPostOfficeMappingEntity) {
-        this.objMcasPostOfficeMappingEntity = objMcasPostOfficeMappingEntity;
+    public McasPostOfficeEntity cloneNotRef() {
+        return SerializationUtils.clone(this);
     }
 }

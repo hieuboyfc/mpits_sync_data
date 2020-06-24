@@ -3,12 +3,12 @@ package com.fps.mpits.modules.cate_rate_postal.eo;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility;
 import com.fps.mpits.logging.AuditingEntityListener;
-import com.fps.mpits.modules.app.eo.McasListApproveDataEntity;
 import com.fps.mpits.util.Constant;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
+import org.apache.commons.lang3.SerializationUtils;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -70,13 +70,8 @@ public class McasItemTypeServiceEntity implements Serializable {
     @Column(name = "UPDATEDBY")
     private String updatedBy;
 
-    @Transient
-    private McasItemTypeEntity mcasItemTypeEntity;
-
-    @Transient
-    private McasServiceEntity mcasServiceEntity;
-
-    @Transient
-    private McasListApproveDataEntity objMcasListApproveDataEntity;
+    public McasItemTypeServiceEntity cloneNotRef() {
+        return SerializationUtils.clone(this);
+    }
 
 }

@@ -102,12 +102,12 @@ public class Constant {
     public class ExceptionText {
 
         // BEGIN EXCEPTION TEXT
-        public static final String NOT_FOUND_LIST_APPROVE_DATA = "Danh sách dữ liệu ĐỒNG BỘ trong BẢNG: McasListApproveDataEntity đang bị trống !!!";
-        public static final String NOT_FOUND_TABLE = "Không tìm thấy tên BẢNG trong thư viện đồng bộ !!!";
-        public static final String DATA_TABLE_IS_NULL = "Dữ liệu của BẢNG: [%s] đang bị trống !!!";
-        public static final String PUSH_DATA_TABLE_TO_DB = "Đẩy dữ liệu trong BẢNG: [%s] đến DATABASE hệ thống bị lỗi !!!";
-        public static final String PUSH_DATA_TABLE_SUCCESS = "Đẩy dữ liệu trong BẢNG: [%s] thành công với MÃ ĐỒNG BỘ: [%s] và HÀNH ĐỘNG: [%s]";
-        public static final String SYNC_DATA_SUCCESS = "Đồng bộ thành công dữ liệu có MÃ ĐỒNG BỘ: [%s] đến BẢNG: [%s]";
+        public static final String NOT_FOUND_LIST_APPROVE_DATA = "List of SYNC data in TABLE: [MCAS_LIST_APPROVE_DATA] is empty !!!";
+        public static final String NOT_FOUND_TABLE = "Not found TABLE in sync library !!!";
+        public static final String DATA_TABLE_IS_NULL = "Data of TABLE: [%s] is empty !!!";
+        public static final String PUSH_DATA_TABLE_TO_DB = "Push data in TABLE: [%s] to DATABASE system is failing !!!";
+        public static final String PUSH_DATA_TABLE_SUCCESS = "Push data in TABLE: [%s] success with SYNC_ID: [%s] and ACTION: [%s]";
+        public static final String SYNC_DATA_SUCCESS = "Successfully sync data with SYNC_ID: [%s] come TABLE: [%s]";
         // END EXCEPTION TEXT
 
         private ExceptionText() {

@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
+import org.apache.commons.lang3.SerializationUtils;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -31,7 +32,7 @@ public class McasAdministrativeSearchEntity implements Serializable {
     @Basic
     @Id
     @Column(name = "ID", unique = true, nullable = false)
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     // Mã tỉnh, thành phố
@@ -69,67 +70,8 @@ public class McasAdministrativeSearchEntity implements Serializable {
     @Column(name = "UNIT_TYPE")
     private String unitType;
 
-    public int getId() {
-        return id;
+    public McasAdministrativeSearchEntity cloneNotRef() {
+        return SerializationUtils.clone(this);
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getProvinceCode() {
-        return provinceCode;
-    }
-
-    public void setProvinceCode(String provinceCode) {
-        this.provinceCode = provinceCode;
-    }
-
-    public String getDistrictCode() {
-        return districtCode;
-    }
-
-    public void setDistrictCode(String districtCode) {
-        this.districtCode = districtCode;
-    }
-
-    public String getWardCode() {
-        return wardCode;
-    }
-
-    public void setWardCode(String wardCode) {
-        this.wardCode = wardCode;
-    }
-
-    public String getPostCode() {
-        return postCode;
-    }
-
-    public void setPostCode(String postCode) {
-        this.postCode = postCode;
-    }
-
-    public String getfName() {
-        return fName;
-    }
-
-    public void setfName(String fName) {
-        this.fName = fName;
-    }
-
-    public String getsName() {
-        return sName;
-    }
-
-    public void setsName(String sName) {
-        this.sName = sName;
-    }
-
-    public String getUnitType() {
-        return unitType;
-    }
-
-    public void setUnitType(String unitType) {
-        this.unitType = unitType;
-    }
 }

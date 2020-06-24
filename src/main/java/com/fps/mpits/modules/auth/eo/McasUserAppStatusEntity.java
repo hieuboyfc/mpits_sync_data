@@ -8,10 +8,10 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
+import org.apache.commons.lang3.SerializationUtils;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.List;
 
 /**
  * @author HieuDT28 (Hiếu Boy) - 19/05/2020
@@ -48,28 +48,8 @@ public class McasUserAppStatusEntity implements Serializable {
     @Column(name = "STATUS")
     private int status;
 
-    public String getAppCode() {
-        return appCode;
-    }
-
-    public void setAppCode(String appCode) {
-        this.appCode = appCode;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public int getStatus() {
-        return status;
-    }
-
-    public void setStatus(int status) {
-        this.status = status;
+    public McasUserAppStatusEntity cloneNotRef() {
+        return SerializationUtils.clone(this);
     }
 
 }
