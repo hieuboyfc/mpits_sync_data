@@ -14,8 +14,9 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * @author HieuDT28 (Hiếu Boy) - 19/05/2020
- * @see <a href="https://www.tutorialspoint.com/jpa/jpa_entity_relationships.htm">https://www.tutorialspoint.com/jpa/jpa_entity_relationships.htm</a>
+ * @author HieuDT28 - (Hiếu Boy)
+ * created 19/05/2020 - 17:30
+ * @see <a href="https://www.tutorialspoint.com/jpa/jpa_entity_relationships.htm"></a>
  */
 
 @Entity

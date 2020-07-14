@@ -11,9 +11,9 @@ import javax.persistence.Table;
 import java.util.Date;
 
 /**
- * @author HieuDT28 (Hiếu Boy) - 19/05/2020
- * @see <a href=
- * "http://www.baeldung.com/database-auditing-jpa">http://www.baeldung.com/database-auditing-jpa</a>
+ * @author HieuDT28 - (Hiếu Boy)
+ * created 19/05/2020 - 17:30
+ * @see <a href="http://www.baeldung.com/database-auditing-jpa"></a>
  */
 
 @Component

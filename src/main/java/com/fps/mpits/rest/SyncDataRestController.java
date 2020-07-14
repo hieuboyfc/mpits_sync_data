@@ -30,7 +30,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @author HieuDT28 (Hiếu Boy) - 19/05/2020
+ * @author HieuDT28 - (Hiếu Boy)
+ * created 19/05/2020 - 17:30
  */
 
 @RestController
@@ -126,8 +127,11 @@ public class SyncDataRestController {
                 case Constant.EntityTable.MCAS_ITEM_GROUP:
                     objEntity = Jackson.getInstance().string2Object(item.listData(), McasItemGroupEntity.class);
                     break;
-                case Constant.EntityTable.MCAS_ITEM_TYPE_SERVICE:
-                    objEntity = Jackson.getInstance().string2Object(item.listData(), McasItemTypeServiceEntity.class);
+                case Constant.EntityTable.MCAS_ITEM_GROUP_SERVICE:
+                    objEntity = Jackson.getInstance().string2Object(item.listData(), McasItemGroupServiceEntity.class);
+                    break;
+                case Constant.EntityTable.MCAS_ITEM_GROUP_TYPE:
+                    objEntity = Jackson.getInstance().string2Object(item.listData(), McasItemGroupTypeEntity.class);
                     break;
                 case Constant.EntityTable.MCAS_ITEM_TYPE:
                     objEntity = Jackson.getInstance().string2Object(item.listData(), McasItemTypeEntity.class);

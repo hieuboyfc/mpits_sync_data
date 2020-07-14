@@ -14,7 +14,8 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * @author HieuDT28 (Hiếu Boy) - 19/05/2020
+ * @author HieuDT28 - (Hiếu Boy)
+ * created 19/05/2020 - 17:30
  */
 
 @EntityListeners(AuditingEntityListener.class)
@@ -39,11 +40,6 @@ public class McasItemTypeEntity implements Serializable {
     @Basic
     @Column(name = "ITEM_TYPE_NAME", length = 100, nullable = false)
     private String itemTypeName;
-
-    // Mã nhóm hàng
-    @Basic
-    @Column(name = "ITEM_GROUP_ID", length = 60, nullable = false)
-    private String itemGroupId;
 
     // Trạng thái: (0: Deactive, 1: Active, -9: Delete)
     @Basic

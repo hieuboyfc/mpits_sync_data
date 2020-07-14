@@ -9,9 +9,9 @@ import javax.servlet.http.HttpServletRequest;
 import java.nio.charset.StandardCharsets;
 
 /**
- * @author HieuDT28 (Hiếu Boy) - 19/05/2020
- * @see <a href=
- * "https://gist.github.com/c0rp-aubakirov/a4349cbd187b33138969">https://gist.github.com/c0rp-aubakirov/a4349cbd187b33138969</a>
+ * @author HieuDT28 - (Hiếu Boy)
+ * created 19/05/2020 - 17:30
+ * @see <a href="https://gist.github.com/c0rp-aubakirov/a4349cbd187b33138969"></a>
  */
 
 @Component

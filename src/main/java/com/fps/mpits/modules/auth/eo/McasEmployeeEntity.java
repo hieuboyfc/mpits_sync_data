@@ -17,7 +17,8 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * @author HieuDT28 (Hiếu Boy) - 19/05/2020
+ * @author HieuDT28 - (Hiếu Boy)
+ * created 19/05/2020 - 17:30
  */
 
 @EntityListeners(AuditingEntityListener.class)

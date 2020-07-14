@@ -1,4 +1,4 @@
-package com.fps.mpits.modules.auth.eo;
+package com.fps.mpits.modules.cate_rate_postal.eo;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility;
@@ -13,23 +13,22 @@ import java.io.Serializable;
 /**
  * @author HieuDT28 - (Hiếu Boy)
  * created 19/05/2020 - 17:30
- * @see <a href="https://www.objectdb.com/java/jpa/entity/id"></a>
  */
 
 @Accessors(fluent = true)
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
 @JsonAutoDetect(fieldVisibility = Visibility.ANY)
 @Embeddable
-public class McasUserAppStatusEntityId implements Serializable {
+public class McasItemGroupServiceEntityId implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    // Mã ứng dụng
-    private String appCode;
+    // Mã nhóm hàng
+    private String itemGroupId;
 
-    // Username
-    private String username;
+    // Mã sản phẩm dịch vụ
+    private String mailServiceId;
 
 }

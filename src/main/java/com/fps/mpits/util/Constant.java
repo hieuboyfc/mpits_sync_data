@@ -1,7 +1,8 @@
 package com.fps.mpits.util;
 
 /**
- * @author HieuDT28 (Hiếu Boy) - 19/05/2020
+ * @author HieuDT28 - (Hiếu Boy)
+ * created 19/05/2020 - 17:30
  */
 
 public class Constant {
@@ -42,7 +43,8 @@ public class Constant {
         public static final String MCAS_NATIONAL_CITY = "MCAS_NATIONAL_CITY";
         public static final String MCAS_POSTOFFICE = "MCAS_POSTOFFICE";
         public static final String MCAS_POSTOFFICE_MAPPING = "MCAS_POSTOFFICE_MAPPING";
-        public static final String MCAS_ITEM_TYPE_SERVICE = "MCAS_ITEM_TYPE_SERVICE";
+        public static final String MCAS_ITEM_GROUP_SERVICE = "MCAS_ITEM_GROUP_SERVICE";
+        public static final String MCAS_ITEM_GROUP_TYPE = "MCAS_ITEM_GROUP_TYPE";
         public static final String MCAS_ITEM_TYPE = "MCAS_ITEM_TYPE";
         public static final String MCAS_ITEM_GROUP = "MCAS_ITEM_GROUP";
         public static final String MCAS_FEE_TYPE = "MCAS_FEE_TYPE";
