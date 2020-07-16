@@ -110,9 +110,22 @@ public class Constant {
         public static final String PUSH_DATA_TABLE_TO_DB = "Push data in TABLE: [%s] to DATABASE system is failing !!!";
         public static final String PUSH_DATA_TABLE_SUCCESS = "Push data in TABLE: [%s] success with SYNC_ID: [%s] and ACTION: [%s]";
         public static final String SYNC_DATA_SUCCESS = "Successfully sync data with SYNC_ID: [%s] come TABLE: [%s]";
+        static final String ERROR_PROCESS_DATA = "Error while processing data : {}";
         // END EXCEPTION TEXT
 
         private ExceptionText() {
+
+        }
+    }
+
+    public class Number {
+
+        // BEGIN NUMBER
+        public static final int NUMBER_I_0 = 0;
+        public static final int NUMBER_I_1 = 1;
+        // END NUMBER
+
+        private Number() {
 
         }
     }
@@ -123,6 +136,7 @@ public class Constant {
         public static final String COOKIE_API_KEY = "cApiKey";
         public static final int CODE_DIGITS = 8; // Mã số
         public static final int EXPIRATION_IN_MS = 600000; // Thời gian hết hạn (600000 ms = 10 phút)
+        public static final int PASSWORD_EXPIRY_DATE = 90; // Ngày hết hạn mật khẩu là 90 ngày
         // END SYNC PROPERTIES
 
         private SyncProperties() {

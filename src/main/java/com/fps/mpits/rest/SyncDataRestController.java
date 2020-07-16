@@ -6,6 +6,7 @@ import com.fps.mpits.modules.app.eo.McasApplicationEntity;
 import com.fps.mpits.modules.app.eo.McasListApproveDataEntity;
 import com.fps.mpits.modules.auth.eo.*;
 import com.fps.mpits.modules.cate.eo.*;
+import com.fps.mpits.modules.cate.repo.IMcasAdministrativeUnitRepository;
 import com.fps.mpits.modules.cate_rate_postal.eo.*;
 import com.fps.mpits.request.RequestClientInfo;
 import com.fps.mpits.request.RequestScope;
@@ -15,6 +16,9 @@ import com.fps.mpits.util.Constant;
 import com.fps.mpits.util.Jackson;
 import com.fps.mpits.util.TOTP;
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.http.ResponseEntity;
@@ -40,6 +44,15 @@ import java.util.List;
 @Transactional
 public class SyncDataRestController {
 
+    private static final Logger logger = LoggerFactory.getLogger(SyncDataRestController.class);
+
+    private IMcasAdministrativeUnitRepository mcasAdministrativeUnitRepository;
+
+    @Autowired
+    public SyncDataRestController(IMcasAdministrativeUnitRepository mcasAdministrativeUnitRepository) {
+        this.mcasAdministrativeUnitRepository = mcasAdministrativeUnitRepository;
+    }
+
     @PersistenceContext
     protected EntityManager entityManagerSync;
 
@@ -52,19 +65,23 @@ public class SyncDataRestController {
                                                           HttpServletRequest request) {
         // Xác thực TOTP
         if (!TOTP.getInstance().checkTOTP(Constant.RestController.EXCUTE_OTHER, totp,
-                Constant.SyncProperties.EXPIRATION_IN_MS, Constant.SyncProperties.CODE_DIGITS))
+                Constant.SyncProperties.EXPIRATION_IN_MS, Constant.SyncProperties.CODE_DIGITS)) {
+            logger.error(String.format(Constant.RestController.AUTH_JOB, totp));
             throw new BadRequestException(String.format(Constant.RestController.AUTH_JOB, totp));
+        }
 
         // Kiểm tra dữ liệu của danh sách duyệt có tồn tại không
-        if (lstMcasListApproveDataEntity == null || lstMcasListApproveDataEntity.isEmpty())
+        if (lstMcasListApproveDataEntity == null || lstMcasListApproveDataEntity.isEmpty()) {
+            logger.error(Constant.ExceptionText.NOT_FOUND_LIST_APPROVE_DATA);
             throw new BadRequestException(Constant.ExceptionText.NOT_FOUND_LIST_APPROVE_DATA);
+        }
 
         Object objEntity;
         List<SyncResponse> responses = new ArrayList<>();
         for (McasListApproveDataEntity item : lstMcasListApproveDataEntity) {
             SyncResponse syncResponse = new SyncResponse();
             syncResponse.id(item.id());
-            syncResponse.type((byte) 1);
+            syncResponse.type((byte) Constant.Number.NUMBER_I_1);
             syncResponse.message(String.format(Constant.ExceptionText.SYNC_DATA_SUCCESS, item.id(), item.listType()));
             switch (item.listType()) {
                 case Constant.EntityTable.MCAS_APPLICATION:
@@ -99,6 +116,8 @@ public class SyncDataRestController {
                     break;
                 case Constant.EntityTable.MCAS_ADMINISTRATIVE_UNIT:
                     objEntity = Jackson.getInstance().string2Object(item.listData(), McasAdministrativeUnitEntity.class);
+                    McasAdministrativeUnitEntity entity = (McasAdministrativeUnitEntity) objEntity;
+                    updateLocationByParent(entity.code(), entity.isFar(), entity.isIsland());
                     break;
                 case Constant.EntityTable.MCAS_ADMINISTRATIVE_POSTCODE:
                     objEntity = Jackson.getInstance().string2Object(item.listData(), McasAdministrativePostCodeEntity.class);
@@ -159,21 +178,25 @@ public class SyncDataRestController {
                     break;
                 default:
                     syncResponse.message(Constant.ExceptionText.NOT_FOUND_TABLE);
-                    syncResponse.type((byte) 0);
+                    syncResponse.type((byte) Constant.Number.NUMBER_I_0);
+                    logger.error(Constant.ExceptionText.NOT_FOUND_TABLE);
                     throw new NotAcceptableException(Constant.ExceptionText.NOT_FOUND_TABLE);
             }
             if (objEntity == null) {
                 syncResponse.message(String.format(Constant.ExceptionText.DATA_TABLE_IS_NULL, item.listType()));
-                syncResponse.type((byte) 0);
+                syncResponse.type((byte) Constant.Number.NUMBER_I_0);
+                logger.error(String.format(Constant.ExceptionText.DATA_TABLE_IS_NULL, item.listType()));
                 throw new BadRequestException(String.format(Constant.ExceptionText.DATA_TABLE_IS_NULL, item.listType()));
             }
             if (!push2Db(item.listType(), item.listAction(), objEntity)) {
                 syncResponse.message(String.format(Constant.ExceptionText.PUSH_DATA_TABLE_TO_DB, item.listType()));
-                syncResponse.type((byte) 0);
+                syncResponse.type((byte) Constant.Number.NUMBER_I_0);
+                logger.error(String.format(Constant.ExceptionText.PUSH_DATA_TABLE_TO_DB, item.listType()));
                 throw new BadRequestException(String.format(Constant.ExceptionText.PUSH_DATA_TABLE_TO_DB, item.listType()));
             }
             responses.add(syncResponse);
-            System.out.println(String.format(Constant.ExceptionText.PUSH_DATA_TABLE_SUCCESS, item.listType(), item.id(), item.listAction()));
+            /*System.out.println(String.format(Constant.ExceptionText.PUSH_DATA_TABLE_SUCCESS, item.listType(), item.id(), item.listAction()));*/
+            logger.info(String.format(Constant.ExceptionText.PUSH_DATA_TABLE_SUCCESS, item.listType(), item.id(), item.listAction()));
 
             // Lấy thông tin từ request để lưu vào bảng MCAS_AUDIT_LOG
             RequestScope requestScope = BeanUtil.getBean(RequestScope.class);
@@ -192,12 +215,10 @@ public class SyncDataRestController {
     }
 
     /**
-     * push2Db - push to db
-     *
-     * @return T
+     * push2Db - Push to DB
      */
     protected <T> boolean push2Db(String listType, String listAction, T objEntity) {
-        McasUserAppEntity mcasUserAppEntity = null;
+        McasUserAppEntity mcasUserAppEntity;
         if (listType.equals(Constant.EntityTable.MCAS_USER_APP)) {
             mcasUserAppEntity = (McasUserAppEntity) objEntity;
             if (mcasUserAppEntity.lstMcasEmployeeEntity() != null
@@ -217,7 +238,7 @@ public class SyncDataRestController {
     }
 
     /**
-     * push2Db - push to db
+     * push2Db - Push to DB
      */
     protected <T> boolean push2Db(String listAction, T objEntity) {
         if (StringUtils.isEmpty(listAction))
@@ -233,5 +254,17 @@ public class SyncDataRestController {
             return true;
         }
         return false;
+    }
+
+    /**
+     * Cập nhật vị trí vùng xa, hải đảo cho Danh mục MCAS_ADMINISTRATIVE_UNIT
+     */
+    protected void updateLocationByParent(String code, Integer isFar, Integer isIsLand) {
+        if (isFar == Constant.Number.NUMBER_I_0 || isIsLand == Constant.Number.NUMBER_I_0) {
+            mcasAdministrativeUnitRepository.updateIsFarAndIsLand(code, isFar, isIsLand);
+        }
+        if (isFar == Constant.Number.NUMBER_I_1 || isIsLand == Constant.Number.NUMBER_I_1) {
+            mcasAdministrativeUnitRepository.updateIsFarAndIsLand(code, isFar, isIsLand);
+        }
     }
 }

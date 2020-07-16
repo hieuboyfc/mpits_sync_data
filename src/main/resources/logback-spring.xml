@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <include resource="org/springframework/boot/logging/logback/base.xml"/>
+    <timestamp key="bySecond" datePattern="yyyyMMdd'T'HHmmss"/>
+
+    <!-- Properties -->
+    <property name="LOG_PATH" value="logs"/>
+
+    <!-- File type -->
+    <property name="FILE_TYPE" value="log"/>
+
+    <!-- QTTT Sync Data Profile -->
+    <property name="QTTT_SYNC_DATA" value="HIEUDT28_SYNC_DATA"/>
+
+    <!-- QTTT Sync Data Appender -->
+    <appender name="HIEUDT28_SYNC_DATA_APPENDER" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_PATH}/%d{dd-MM-yyyy}/${QTTT_SYNC_DATA}.${FILE_TYPE}</fileNamePattern>
+            <maxHistory>100</maxHistory>
+            <totalSizeCap>10GB</totalSizeCap>
+        </rollingPolicy>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <Pattern>
+                %d{dd-MM-yyyy HH:mm:ss.SSS} [%thread] %-5level %logger{36}.%M - %msg%n
+            </Pattern>
+        </encoder>
+    </appender>
+
+    <!-- Root Logger -->
+    <root level="info">
+        <appender-ref ref="HIEUDT28_SYNC_DATA_APPENDER"/>
+    </root>
+
+    <!-- QTTT Sync Data Logger -->
+    <logger name="${QTTT_SYNC_DATA}" additivity="false" level="info">
+        <appender-ref ref="HIEUDT28_SYNC_DATA_APPENDER"/>
+    </logger>
+
+</configuration>

@@ -1,5 +1,8 @@
 package com.fps.mpits.util;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
@@ -10,6 +13,8 @@ import java.io.StringWriter;
  */
 
 public class Common {
+
+    private static final Logger logger = LoggerFactory.getLogger(Common.class);
 
     private Common() {
 
@@ -23,6 +28,7 @@ public class Common {
         try {
             stringWriter.close();
         } catch (IOException ex) {
+            logger.error(Constant.ExceptionText.ERROR_PROCESS_DATA + e.getMessage());
             ex.getMessage();
         }
         return stringWriter.toString();
