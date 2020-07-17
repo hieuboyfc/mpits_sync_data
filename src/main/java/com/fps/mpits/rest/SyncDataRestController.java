@@ -192,7 +192,7 @@ public class SyncDataRestController {
                 logger.error(String.format(Constant.ExceptionText.PUSH_DATA_TABLE_TO_DB, item.listType()));
                 throw new BadRequestException(String.format(Constant.ExceptionText.PUSH_DATA_TABLE_TO_DB, item.listType()));
             }
-            updateLocationByParent(item.listType(), objEntity);
+            /*updateLocationByParent(item.listType(), objEntity);*/
             responses.add(syncResponse);
             System.out.println(String.format(Constant.ExceptionText.PUSH_DATA_TABLE_SUCCESS, item.listType(), item.id(), item.listAction()));
             logger.info(String.format(Constant.ExceptionText.PUSH_DATA_TABLE_SUCCESS, item.listType(), item.id(), item.listAction()));
