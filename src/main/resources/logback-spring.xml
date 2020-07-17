@@ -11,6 +11,7 @@
 
     <!-- QTTT Sync Data Profile -->
     <property name="QTTT_SYNC_DATA" value="HIEUDT28_SYNC_DATA"/>
+    <property name="QTTT_RESPONSE" value="com.fps.mpits.rest.SyncDataRestController"/>
 
     <!-- QTTT Sync Data Appender -->
     <appender name="HIEUDT28_SYNC_DATA_APPENDER" class="ch.qos.logback.core.rolling.RollingFileAppender">
@@ -26,13 +27,8 @@
         </encoder>
     </appender>
 
-    <!-- Root Logger -->
-    <root level="info">
-        <appender-ref ref="HIEUDT28_SYNC_DATA_APPENDER"/>
-    </root>
-
     <!-- QTTT Sync Data Logger -->
-    <logger name="${QTTT_SYNC_DATA}" additivity="false" level="info">
+    <logger name="${QTTT_RESPONSE}" additivity="false" level="info">
         <appender-ref ref="HIEUDT28_SYNC_DATA_APPENDER"/>
     </logger>
 

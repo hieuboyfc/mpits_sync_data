@@ -112,6 +112,29 @@ public class McasOrganizationEntity implements Serializable {
     @Column(name = "MGTCASE")
     private Integer mgtCase;
 
+    @Transient
+    private Long numberOfChild;
+
+    // Constructor cho Hệ thống HTKH khi sử dụng thư viện đồng bộ
+    public McasOrganizationEntity(McasOrganizationEntity objInput, Long numberOfChild) {
+        this.orgCode(objInput.orgCode());
+        this.name(objInput.name());
+        this.description(objInput.description());
+        this.status(objInput.status());
+        this.parentCode(objInput.parentCode());
+        this.orgLevel(objInput.orgLevel());
+        this.orgType(objInput.orgType());
+        this.address(objInput.address());
+        this.phoneNumber(objInput.phoneNumber());
+        this.administrativeCode(objInput.administrativeCode());
+        this.postalCode(objInput.postalCode());
+        this.postType(objInput.postType());
+        this.startDate(objInput.startDate());
+        this.communeCode(objInput.communeCode());
+        this.notReal(objInput.notReal());
+        this.numberOfChild(numberOfChild);
+    }
+
     public McasOrganizationEntity cloneNotRef() {
         return SerializationUtils.clone(this);
     }

@@ -72,6 +72,9 @@ public class McasUserEntity implements Serializable {
     @Column(name = "STATUS")
     private Integer status;
 
+    @Transient
+    private McasEmployeeEntity mcasEmployeeEntity;
+
     public McasUserEntity cloneNotRef() {
         return SerializationUtils.clone(this);
     }

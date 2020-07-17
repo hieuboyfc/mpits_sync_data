@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fps.mpits.logging.AuditingEntityListener;
+import com.fps.mpits.modules.cate.eo.McasOrganizationEntity;
 import com.fps.mpits.util.Constant;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -32,88 +33,91 @@ import java.util.Date;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class McasEmployeeEntity implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	// Mã nhân viên
-	@Basic
-	@Id
-	@Column(name = "CODE", nullable = false)
-	private String code;
+    // Mã nhân viên
+    @Basic
+    @Id
+    @Column(name = "CODE", nullable = false)
+    private String code;
 
-	// Tên nhân viên
-	@Basic
-	@Column(name = "FULLNAME")
-	private String fullname;
+    // Tên nhân viên
+    @Basic
+    @Column(name = "FULLNAME")
+    private String fullname;
 
-	// Ngày sinh
-	@Basic
-	@Column(name = "DATE_OF_BIRTH")
-	@Temporal(TemporalType.DATE)
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
-	private Date dateOfBirth;
+    // Ngày sinh
+    @Basic
+    @Column(name = "DATE_OF_BIRTH")
+    @Temporal(TemporalType.DATE)
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+    private Date dateOfBirth;
 
-	// Số CMT/ Số an sinh xã hội
-	@Basic
-	@Column(name = "ID_CARD")
-	private String idCard;
+    // Số CMT/ Số an sinh xã hội
+    @Basic
+    @Column(name = "ID_CARD")
+    private String idCard;
 
-	// Địa chỉ email
-	@Basic
-	@Column(name = "EMAIL")
-	private String email;
+    // Địa chỉ email
+    @Basic
+    @Column(name = "EMAIL")
+    private String email;
 
-	// Mã tổ chức
-	@Basic
-	@Column(name = "ORG_CODE")
-	private String orgCode;
+    // Mã tổ chức
+    @Basic
+    @Column(name = "ORG_CODE")
+    private String orgCode;
 
-	// Số điện thoại
-	@Basic
-	@Column(name = "PHONE_NUMBER")
-	private String phoneNumber;
+    // Số điện thoại
+    @Basic
+    @Column(name = "PHONE_NUMBER")
+    private String phoneNumber;
 
-	// Trạng thái (0 - chưa kích hoạt, 1 đã kích hoạt)
-	@Basic
-	@Column(name = "STATUS")
-	private int status;
+    // Trạng thái (0 - chưa kích hoạt, 1 đã kích hoạt)
+    @Basic
+    @Column(name = "STATUS")
+    private int status;
 
-	// Loại giấy tờ: 1 - CMT, 2 - Thẻ căn cước, 3 - Hộ chiếu
-	@Basic
-	@Column(name = "ID_CARD_TYPE")
-	private int idCardType;
+    // Loại giấy tờ: 1 - CMT, 2 - Thẻ căn cước, 3 - Hộ chiếu
+    @Basic
+    @Column(name = "ID_CARD_TYPE")
+    private int idCardType;
 
-	// Mã chức vụ
-	@Basic
-	@Column(name = "POSITION_ID", length = 50)
-	private String positionId;
+    // Mã chức vụ
+    @Basic
+    @Column(name = "POSITION_ID", length = 50)
+    private String positionId;
 
-	// Tên chức vụ
-	@Basic
-	@Column(name = "POSITION_NAME")
-	private String positionName;
+    // Tên chức vụ
+    @Basic
+    @Column(name = "POSITION_NAME")
+    private String positionName;
 
-	// Mã chức danh
-	@Basic
-	@Column(name = "TITLE_ID", length = 50)
-	private String titleId;
+    // Mã chức danh
+    @Basic
+    @Column(name = "TITLE_ID", length = 50)
+    private String titleId;
 
-	// Tên chức danh
-	@Basic
-	@Column(name = "TITLE_NAME")
-	private String titleName;
+    // Tên chức danh
+    @Basic
+    @Column(name = "TITLE_NAME")
+    private String titleName;
 
-	// Giới tính
-	@Basic
-	@Column(name = "GENDER")
-	private Integer gender;
+    // Giới tính
+    @Basic
+    @Column(name = "GENDER")
+    private Integer gender;
 
-	// Địa chỉ
-	@Basic
-	@Column(name = "ADDRESS", length = 500)
-	private String address;
+    // Địa chỉ
+    @Basic
+    @Column(name = "ADDRESS", length = 500)
+    private String address;
 
-	public McasEmployeeEntity cloneNotRef() {
-		return SerializationUtils.clone(this);
-	}
+    @Transient
+    private McasOrganizationEntity mcasOrganizationEntity;
+
+    public McasEmployeeEntity cloneNotRef() {
+        return SerializationUtils.clone(this);
+    }
 
 }

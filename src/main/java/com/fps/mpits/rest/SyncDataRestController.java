@@ -195,7 +195,7 @@ public class SyncDataRestController {
                 throw new BadRequestException(String.format(Constant.ExceptionText.PUSH_DATA_TABLE_TO_DB, item.listType()));
             }
             responses.add(syncResponse);
-            /*System.out.println(String.format(Constant.ExceptionText.PUSH_DATA_TABLE_SUCCESS, item.listType(), item.id(), item.listAction()));*/
+            System.out.println(String.format(Constant.ExceptionText.PUSH_DATA_TABLE_SUCCESS, item.listType(), item.id(), item.listAction()));
             logger.info(String.format(Constant.ExceptionText.PUSH_DATA_TABLE_SUCCESS, item.listType(), item.id(), item.listAction()));
 
             // Lấy thông tin từ request để lưu vào bảng MCAS_AUDIT_LOG
