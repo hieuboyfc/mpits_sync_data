@@ -116,8 +116,6 @@ public class SyncDataRestController {
                     break;
                 case Constant.EntityTable.MCAS_ADMINISTRATIVE_UNIT:
                     objEntity = Jackson.getInstance().string2Object(item.listData(), McasAdministrativeUnitEntity.class);
-                    McasAdministrativeUnitEntity entity = (McasAdministrativeUnitEntity) objEntity;
-                    updateLocationByParent(entity.code(), entity.isFar(), entity.isIsland());
                     break;
                 case Constant.EntityTable.MCAS_ADMINISTRATIVE_POSTCODE:
                     objEntity = Jackson.getInstance().string2Object(item.listData(), McasAdministrativePostCodeEntity.class);
@@ -194,6 +192,7 @@ public class SyncDataRestController {
                 logger.error(String.format(Constant.ExceptionText.PUSH_DATA_TABLE_TO_DB, item.listType()));
                 throw new BadRequestException(String.format(Constant.ExceptionText.PUSH_DATA_TABLE_TO_DB, item.listType()));
             }
+            updateLocationByParent(item.listType(), objEntity);
             responses.add(syncResponse);
             System.out.println(String.format(Constant.ExceptionText.PUSH_DATA_TABLE_SUCCESS, item.listType(), item.id(), item.listAction()));
             logger.info(String.format(Constant.ExceptionText.PUSH_DATA_TABLE_SUCCESS, item.listType(), item.id(), item.listAction()));
@@ -259,12 +258,16 @@ public class SyncDataRestController {
     /**
      * Cập nhật vị trí vùng xa, hải đảo cho Danh mục MCAS_ADMINISTRATIVE_UNIT
      */
-    protected void updateLocationByParent(String code, Integer isFar, Integer isIsLand) {
-        if (isFar == Constant.Number.NUMBER_I_0 || isIsLand == Constant.Number.NUMBER_I_0) {
-            mcasAdministrativeUnitRepository.updateIsFarAndIsLand(code, isFar, isIsLand);
-        }
-        if (isFar == Constant.Number.NUMBER_I_1 || isIsLand == Constant.Number.NUMBER_I_1) {
-            mcasAdministrativeUnitRepository.updateIsFarAndIsLand(code, isFar, isIsLand);
+    protected <T> void updateLocationByParent(String listType, T objEntity) {
+        McasAdministrativeUnitEntity entity;
+        if (listType.equals(Constant.EntityTable.MCAS_ADMINISTRATIVE_UNIT)) {
+            entity = (McasAdministrativeUnitEntity) objEntity;
+            if (entity.isFar() == Constant.Number.NUMBER_I_0 || entity.isIsland() == Constant.Number.NUMBER_I_0) {
+                mcasAdministrativeUnitRepository.updateIsFarAndIsLand(entity.code(), entity.isFar(), entity.isIsland());
+            }
+            if (entity.isFar() == Constant.Number.NUMBER_I_1 || entity.isIsland() == Constant.Number.NUMBER_I_1) {
+                mcasAdministrativeUnitRepository.updateIsFarAndIsLand(entity.code(), entity.isFar(), entity.isIsland());
+            }
         }
     }
 }
