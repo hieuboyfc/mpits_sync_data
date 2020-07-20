@@ -104,13 +104,15 @@ public class Constant {
     public class ExceptionText {
 
         // BEGIN EXCEPTION TEXT
+        static final String ERROR_PROCESS_DATA = "Error while processing data : {}";
         public static final String NOT_FOUND_LIST_APPROVE_DATA = "List of SYNC data in TABLE: [MCAS_LIST_APPROVE_DATA] is empty !!!";
         public static final String NOT_FOUND_TABLE = "Not found TABLE in sync library !!!";
         public static final String DATA_TABLE_IS_NULL = "Data of TABLE: [%s] is empty !!!";
         public static final String PUSH_DATA_TABLE_TO_DB = "Push data in TABLE: [%s] to DATABASE system is failing !!!";
         public static final String PUSH_DATA_TABLE_SUCCESS = "Push data in TABLE: [%s] success with SYNC_ID: [%s] and ACTION: [%s]";
         public static final String SYNC_DATA_SUCCESS = "Successfully sync data with SYNC_ID: [%s] come TABLE: [%s]";
-        static final String ERROR_PROCESS_DATA = "Error while processing data : {}";
+        public static final String DATA_SYNC = "Data sync : [%s]";
+        public static final String MESSAGE_WARN = "=====================================================================";
         // END EXCEPTION TEXT
 
         private ExceptionText() {

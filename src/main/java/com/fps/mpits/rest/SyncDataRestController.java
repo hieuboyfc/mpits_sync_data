@@ -192,10 +192,16 @@ public class SyncDataRestController {
                 logger.error(String.format(Constant.ExceptionText.PUSH_DATA_TABLE_TO_DB, item.listType()));
                 throw new BadRequestException(String.format(Constant.ExceptionText.PUSH_DATA_TABLE_TO_DB, item.listType()));
             }
-            updateLocationByParent(item.listType(), objEntity);
+
             responses.add(syncResponse);
+            updateLocationByParent(item.listType(), objEntity);
+            if (logger.isWarnEnabled()) {
+                logger.warn(Constant.ExceptionText.MESSAGE_WARN + Constant.ExceptionText.MESSAGE_WARN);
+                logger.warn(String.format(Constant.ExceptionText.PUSH_DATA_TABLE_SUCCESS, item.listType(), item.id(), item.listAction()));
+                logger.warn(String.format(Constant.ExceptionText.DATA_SYNC, objEntity));
+                logger.warn(Constant.ExceptionText.MESSAGE_WARN + Constant.ExceptionText.MESSAGE_WARN);
+            }
             System.out.println(String.format(Constant.ExceptionText.PUSH_DATA_TABLE_SUCCESS, item.listType(), item.id(), item.listAction()));
-            logger.info(String.format(Constant.ExceptionText.PUSH_DATA_TABLE_SUCCESS, item.listType(), item.id(), item.listAction()));
 
             // Lấy thông tin từ request để lưu vào bảng MCAS_AUDIT_LOG
             RequestScope requestScope = BeanUtil.getBean(RequestScope.class);
@@ -258,6 +264,7 @@ public class SyncDataRestController {
             entity = (McasAdministrativeUnitEntity) objEntity;
             if (entity.isFar() == Constant.Number.NUMBER_I_0 || entity.isIsland() == Constant.Number.NUMBER_I_0) {
                 mcasAdministrativeUnitRepository.updateIsFarAndIsLand(entity.code(), entity.isFar(), entity.isIsland());
+                return;
             }
             if (entity.isFar() == Constant.Number.NUMBER_I_1 || entity.isIsland() == Constant.Number.NUMBER_I_1) {
                 mcasAdministrativeUnitRepository.updateIsFarAndIsLand(entity.code(), entity.isFar(), entity.isIsland());
