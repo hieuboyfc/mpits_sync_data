@@ -186,13 +186,13 @@ public class SyncDataRestController {
                 logger.error(String.format(Constant.ExceptionText.DATA_TABLE_IS_NULL, item.listType()));
                 throw new BadRequestException(String.format(Constant.ExceptionText.DATA_TABLE_IS_NULL, item.listType()));
             }
-            if (!push2Db(item.listType(), item.listAction(), objEntity)) {
+            if (!pushToDatabase(item.listType(), item.listAction(), objEntity)) {
                 syncResponse.message(String.format(Constant.ExceptionText.PUSH_DATA_TABLE_TO_DB, item.listType()));
                 syncResponse.type((byte) Constant.Number.NUMBER_I_0);
                 logger.error(String.format(Constant.ExceptionText.PUSH_DATA_TABLE_TO_DB, item.listType()));
                 throw new BadRequestException(String.format(Constant.ExceptionText.PUSH_DATA_TABLE_TO_DB, item.listType()));
             }
-            /*updateLocationByParent(item.listType(), objEntity);*/
+            updateLocationByParent(item.listType(), objEntity);
             responses.add(syncResponse);
             System.out.println(String.format(Constant.ExceptionText.PUSH_DATA_TABLE_SUCCESS, item.listType(), item.id(), item.listAction()));
             logger.info(String.format(Constant.ExceptionText.PUSH_DATA_TABLE_SUCCESS, item.listType(), item.id(), item.listAction()));
@@ -201,55 +201,49 @@ public class SyncDataRestController {
             RequestScope requestScope = BeanUtil.getBean(RequestScope.class);
             requestScope.userAgent(RequestClientInfo.getInstance().getUserAgent(request));
             requestScope.ipAddress(RequestClientInfo.getInstance().getClientIpAddr(request));
-            requestScope
-                    .urlRequest(RequestClientInfo.getInstance().getUrlWithQueryString(request));
+            requestScope.urlRequest(RequestClientInfo.getInstance().getUrlWithQueryString(request));
             requestScope.urlReferer(RequestClientInfo.getInstance().getReferer(request));
             requestScope.clientOS(RequestClientInfo.getInstance().getClientOS(request));
             requestScope.clientBrowser(RequestClientInfo.getInstance().getClientBrowser(request));
             requestScope.identifyDevice(RequestClientInfo.getInstance().getIdentifyDevice(request));
-            requestScope.cookie(RequestClientInfo.getInstance().getCookieValueByName(request,
-                    Constant.SyncProperties.COOKIE_API_KEY));
+            requestScope.cookie(RequestClientInfo.getInstance().getCookieValueByName(request, Constant.SyncProperties.COOKIE_API_KEY));
         }
         return ResponseEntity.ok().body(responses);
     }
 
     /**
-     * push2Db - Push to DB
+     * pushToDatabase - Push to Database
      */
-    protected <T> boolean push2Db(String listType, String listAction, T objEntity) {
-        McasUserAppEntity mcasUserAppEntity;
+    protected <T> boolean pushToDatabase(String listType, String listAction, T objEntity) {
+        McasUserAppEntity userAppEntity;
         if (listType.equals(Constant.EntityTable.MCAS_USER_APP)) {
-            mcasUserAppEntity = (McasUserAppEntity) objEntity;
-            if (mcasUserAppEntity.lstMcasEmployeeEntity() != null
-                    && !mcasUserAppEntity.lstMcasEmployeeEntity().isEmpty()) {
-                for (McasEmployeeEntity e : mcasUserAppEntity.lstMcasEmployeeEntity()) {
-                    push2Db(listAction, e);
+            userAppEntity = (McasUserAppEntity) objEntity;
+            if (userAppEntity.lstMcasEmployeeEntity() != null && !userAppEntity.lstMcasEmployeeEntity().isEmpty()) {
+                for (McasEmployeeEntity employeeEntity : userAppEntity.lstMcasEmployeeEntity()) {
+                    pushToDatabase(listAction, employeeEntity);
                 }
             }
-            if (mcasUserAppEntity.lstMcasUserEntity() != null
-                    && !mcasUserAppEntity.lstMcasUserEntity().isEmpty()) {
-                for (McasUserEntity u : mcasUserAppEntity.lstMcasUserEntity()) {
-                    push2Db(listAction, u);
+            if (userAppEntity.lstMcasUserEntity() != null && !userAppEntity.lstMcasUserEntity().isEmpty()) {
+                for (McasUserEntity userEntity : userAppEntity.lstMcasUserEntity()) {
+                    pushToDatabase(listAction, userEntity);
                 }
             }
         }
-        return push2Db(listAction, objEntity);
+        return pushToDatabase(listAction, objEntity);
     }
 
     /**
-     * push2Db - Push to DB
+     * pushToDatabase - Push to Database
      */
-    protected <T> boolean push2Db(String listAction, T objEntity) {
-        if (StringUtils.isEmpty(listAction))
+    protected <T> boolean pushToDatabase(String listAction, T objEntity) {
+        if (StringUtils.isEmpty(listAction)) {
             return false;
-
-        if (listAction.equals(Constant.JpaEvent.ON_PRE_PERSIST)
-                || listAction.equals(Constant.JpaEvent.ON_PRE_UPDATE)) {
+        }
+        if (listAction.equals(Constant.JpaEvent.ON_PRE_PERSIST) || listAction.equals(Constant.JpaEvent.ON_PRE_UPDATE)) {
             entityManagerSync.merge(objEntity);
             return true;
         } else if (listAction.equals(Constant.JpaEvent.ON_PRE_REMOVE)) {
-            entityManagerSync.remove(entityManagerSync.contains(objEntity)
-                    ? objEntity : entityManagerSync.merge(objEntity));
+            entityManagerSync.remove(entityManagerSync.contains(objEntity) ? objEntity : entityManagerSync.merge(objEntity));
             return true;
         }
         return false;
