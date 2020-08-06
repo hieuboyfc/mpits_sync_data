@@ -132,6 +132,7 @@ public class McasOrganizationEntity implements Serializable {
         this.startDate(objInput.startDate());
         this.communeCode(objInput.communeCode());
         this.notReal(objInput.notReal());
+        this.mgtCase(objInput.mgtCase());
         this.numberOfChild(numberOfChild);
     }
 
