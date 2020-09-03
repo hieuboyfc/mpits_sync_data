@@ -1,7 +1,6 @@
-package com.fps.mpits.modules.cate_rate_postal.eo;
+package com.fps.mpits.modules.cate_system_other.eo;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
-import com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility;
 import com.fps.mpits.logging.AuditingEntityListener;
 import com.fps.mpits.util.Constant;
 import lombok.AllArgsConstructor;
@@ -21,32 +20,26 @@ import java.util.Date;
 
 @EntityListeners(AuditingEntityListener.class)
 @Entity
-@Table(name = Constant.EntityTable.MCAS_SERVICE_GROUP)
+@Table(name = Constant.EntityTable.MCAS_FEE_TYPE_GROUP)
 @Accessors(fluent = true)
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-@JsonAutoDetect(fieldVisibility = Visibility.ANY)
-public class McasServiceGroupEntity implements Serializable {
+@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
+public class McasFeeTypeGroupEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    // Nghiệp vụ (01 - DVBC, 02 - TCBC, 03 - PHBC, 04 - Phân phối hàng hóa)
+    // Mã nhóm cước
+    @Basic
     @Id
-    @Basic
-    @Column(name = "SERVICE_REPORT", length = 30, nullable = false)
-    private String serviceReport;
+    @Column(name = "FEE_TYPE_GROUP_ID", length = 10, nullable = false)
+    private String feeTypeGroupId;
 
-    // Mã nhóm dịch vụ
-    @Id
+    // Tên nhóm cước
     @Basic
-    @Column(name = "SERVICE_GROUP_ID", length = 20, nullable = false)
-    private String serviceGroupId;
-
-    // Tên nhóm dịch vụ
-    @Basic
-    @Column(name = "SERVICE_GROUP_NAME", length = 60, nullable = false)
-    private String serviceGroupName;
+    @Column(name = "FEE_TYPE_GROUP_NAME", length = 60, nullable = false)
+    private String feeTypeGroupName;
 
     // Trạng thái: (0: Deactive, 1: Active, -9: Delete)
     @Basic
@@ -54,26 +47,28 @@ public class McasServiceGroupEntity implements Serializable {
     private int status;
 
     // Ngày tạo
+    @Basic
     @Column(name = "CREATED")
     @Temporal(TemporalType.DATE)
     private Date created;
 
     // Ngày cập nhật
+    @Basic
     @Column(name = "UPDATED")
     @Temporal(TemporalType.DATE)
     private Date updated;
 
     // Người tạo
     @Basic
-    @Column(name = "CREATEDBY", length = 50)
+    @Column(name = "CREATEDBY")
     private String createdBy;
 
     // Người cập nhật
     @Basic
-    @Column(name = "UPDATEDBY", length = 50)
+    @Column(name = "UPDATEDBY")
     private String updatedBy;
 
-    public McasServiceGroupEntity cloneNotRef() {
+    public McasFeeTypeGroupEntity cloneNotRef() {
         return SerializationUtils.clone(this);
     }
 }

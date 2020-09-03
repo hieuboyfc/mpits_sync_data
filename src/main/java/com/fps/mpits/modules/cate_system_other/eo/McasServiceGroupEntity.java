@@ -1,6 +1,7 @@
-package com.fps.mpits.modules.cate_rate_postal.eo;
+package com.fps.mpits.modules.cate_system_other.eo;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility;
 import com.fps.mpits.logging.AuditingEntityListener;
 import com.fps.mpits.util.Constant;
 import lombok.AllArgsConstructor;
@@ -20,36 +21,32 @@ import java.util.Date;
 
 @EntityListeners(AuditingEntityListener.class)
 @Entity
-@Table(name = Constant.EntityTable.MCAS_FEE_TYPE)
+@Table(name = Constant.EntityTable.MCAS_SERVICE_GROUP)
 @Accessors(fluent = true)
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
-public class McasFeeTypeEntity implements Serializable {
+@JsonAutoDetect(fieldVisibility = Visibility.ANY)
+public class McasServiceGroupEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    // Mã phụ phí, hệ số
-    @Basic
+    // Nghiệp vụ (01 - DVBC, 02 - TCBC, 03 - PHBC, 04 - Phân phối hàng hóa)
     @Id
-    @Column(name = "FEE_TYPE_ID", length = 20, nullable = false)
-    private String feeTypeId;
-
-    // Tên phụ phí, hệ số
     @Basic
-    @Column(name = "FEE_TYPE_NAME", length = 100, nullable = false)
-    private String feeTypeName;
+    @Column(name = "SERVICE_REPORT", length = 30, nullable = false)
+    private String serviceReport;
 
-    // Mã code phụ phí, hệ số
+    // Mã nhóm dịch vụ
+    @Id
     @Basic
-    @Column(name = "FEE_TYPE_CODE", length = 20)
-    private String feeTypeCode;
+    @Column(name = "SERVICE_GROUP_ID", length = 20, nullable = false)
+    private String serviceGroupId;
 
-    // Mã nhóm cước
+    // Tên nhóm dịch vụ
     @Basic
-    @Column(name = "FEE_TYPE_GROUP_ID", length = 20, nullable = false)
-    private String feeTypeGroupId;
+    @Column(name = "SERVICE_GROUP_NAME", length = 60, nullable = false)
+    private String serviceGroupName;
 
     // Trạng thái: (0: Deactive, 1: Active, -9: Delete)
     @Basic
@@ -57,29 +54,26 @@ public class McasFeeTypeEntity implements Serializable {
     private int status;
 
     // Ngày tạo
-    @Basic
     @Column(name = "CREATED")
     @Temporal(TemporalType.DATE)
     private Date created;
 
     // Ngày cập nhật
-    @Basic
     @Column(name = "UPDATED")
     @Temporal(TemporalType.DATE)
     private Date updated;
 
     // Người tạo
     @Basic
-    @Column(name = "CREATEDBY")
+    @Column(name = "CREATEDBY", length = 50)
     private String createdBy;
 
     // Người cập nhật
     @Basic
-    @Column(name = "UPDATEDBY")
+    @Column(name = "UPDATEDBY", length = 50)
     private String updatedBy;
 
-    public McasFeeTypeEntity cloneNotRef() {
+    public McasServiceGroupEntity cloneNotRef() {
         return SerializationUtils.clone(this);
     }
-
 }

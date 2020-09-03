@@ -1,4 +1,4 @@
-package com.fps.mpits.modules.cate_rate_postal.eo;
+package com.fps.mpits.modules.cate_system_other.eo;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fps.mpits.logging.AuditingEntityListener;
@@ -20,31 +20,26 @@ import java.util.Date;
 
 @EntityListeners(AuditingEntityListener.class)
 @Entity
-@Table(name = Constant.EntityTable.MCAS_VA_SERVICE)
+@Table(name = Constant.EntityTable.MCAS_UOM)
 @Accessors(fluent = true)
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
-public class McasVaServiceEntity implements Serializable {
+public class McasUomEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    // Mã dịch vụ GTGT
+    // Mã đơn vị tính
     @Basic
     @Id
-    @Column(name = "VA_SERVICE_ID", length = 100, nullable = false)
-    private String vaServiceId;
+    @Column(name = "UOM_ID", length = 5, nullable = false)
+    private String uomId;
 
-    // Tên dịch vụ GTGT
+    // Tên đơn vị tính eg: kg, gram, box...
     @Basic
-    @Column(name = "VA_SERVICE_NAME", length = 100, nullable = false)
-    private String vaServiceName;
-
-    // Mã nhóm cước
-    @Basic
-    @Column(name = "FEE_TYPE_GROUP_ID", length = 20, nullable = false)
-    private String feeTypeGroupId;
+    @Column(name = "UOM_NAME", length = 20, nullable = false)
+    private String uomName;
 
     // Trạng thái: (0: Deactive, 1: Active, -9: Delete)
     @Basic
@@ -73,7 +68,7 @@ public class McasVaServiceEntity implements Serializable {
     @Column(name = "UPDATEDBY")
     private String updatedBy;
 
-    public McasVaServiceEntity cloneNotRef() {
+    public McasUomEntity cloneNotRef() {
         return SerializationUtils.clone(this);
     }
 

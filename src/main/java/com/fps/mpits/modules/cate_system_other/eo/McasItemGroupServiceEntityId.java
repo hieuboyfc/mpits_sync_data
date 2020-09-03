@@ -1,4 +1,4 @@
-package com.fps.mpits.modules.cate_rate_postal.eo;
+package com.fps.mpits.modules.cate_system_other.eo;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility;
@@ -21,12 +21,12 @@ import java.io.Serializable;
 @AllArgsConstructor
 @JsonAutoDetect(fieldVisibility = Visibility.ANY)
 @Embeddable
-public class McasServiceVasEntityId implements Serializable {
+public class McasItemGroupServiceEntityId implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    // Mã dịch vụ GTGT
-    private String vaServiceId;
+    // Mã nhóm hàng
+    private String itemGroupId;
 
     // Mã sản phẩm dịch vụ
     private String mailServiceId;

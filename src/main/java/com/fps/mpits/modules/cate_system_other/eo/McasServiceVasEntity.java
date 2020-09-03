@@ -1,6 +1,7 @@
-package com.fps.mpits.modules.cate_rate_postal.eo;
+package com.fps.mpits.modules.cate_system_other.eo;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility;
 import com.fps.mpits.logging.AuditingEntityListener;
 import com.fps.mpits.util.Constant;
 import lombok.AllArgsConstructor;
@@ -20,35 +21,32 @@ import java.util.Date;
 
 @EntityListeners(AuditingEntityListener.class)
 @Entity
-@Table(name = Constant.EntityTable.MCAS_ITEM_GROUP)
+@Table(name = Constant.EntityTable.MCAS_SERVICE_VAS)
 @Accessors(fluent = true)
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
-@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
-public class McasItemGroupEntity implements Serializable {
+@JsonAutoDetect(fieldVisibility = Visibility.ANY)
+@IdClass(McasServiceVasEntityId.class)
+public class McasServiceVasEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    // Mã nhóm hàng
+    // Mã dịch vụ GTGT
     @Basic
     @Id
-    @Column(name = "ITEM_GROUP_ID", length = 20, nullable = false)
-    private String itemGroupId;
+    @Column(name = "VA_SERVICE_ID", length = 100, nullable = false)
+    private String vaServiceId;
 
-    // Tên nhóm hàng
+    // Mã sản phẩm dịch vụ
     @Basic
-    @Column(name = "ITEM_GROUP_NAME", length = 60, nullable = false)
-    private String itemGroupName;
-
-    // Loại nhóm hàng
-    @Basic
-    @Column(name = "ITEM_GROUP_TYPE", length = 10)
-    private String itemGroupType;
+    @Id
+    @Column(name = "MAIL_SERVICE_ID", length = 10, nullable = false)
+    private String mailServiceId;
 
     // Trạng thái: (0: Deactive, 1: Active, -9: Delete)
     @Basic
-    @Column(name = "STATUS", length = 1, nullable = false)
+    @Column(name = "STATUS", length = 1)
     private int status;
 
     // Ngày tạo
@@ -73,7 +71,7 @@ public class McasItemGroupEntity implements Serializable {
     @Column(name = "UPDATEDBY")
     private String updatedBy;
 
-    public McasItemGroupEntity cloneNotRef() {
+    public McasServiceVasEntity cloneNotRef() {
         return SerializationUtils.clone(this);
     }
 

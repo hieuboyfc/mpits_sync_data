@@ -1,4 +1,4 @@
-package com.fps.mpits.modules.cate_rate_postal.eo;
+package com.fps.mpits.modules.cate_system_other.eo;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fps.mpits.logging.AuditingEntityListener;
@@ -20,26 +20,31 @@ import java.util.Date;
 
 @EntityListeners(AuditingEntityListener.class)
 @Entity
-@Table(name = Constant.EntityTable.MCAS_UOM)
+@Table(name = Constant.EntityTable.MCAS_ITEM_GROUP)
 @Accessors(fluent = true)
-@Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Data
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
-public class McasUomEntity implements Serializable {
+public class McasItemGroupEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    // Mã đơn vị tính
+    // Mã nhóm hàng
     @Basic
     @Id
-    @Column(name = "UOM_ID", length = 5, nullable = false)
-    private String uomId;
+    @Column(name = "ITEM_GROUP_ID", length = 20, nullable = false)
+    private String itemGroupId;
 
-    // Tên đơn vị tính eg: kg, gram, box...
+    // Tên nhóm hàng
     @Basic
-    @Column(name = "UOM_NAME", length = 20, nullable = false)
-    private String uomName;
+    @Column(name = "ITEM_GROUP_NAME", length = 60, nullable = false)
+    private String itemGroupName;
+
+    // Loại nhóm hàng
+    @Basic
+    @Column(name = "ITEM_GROUP_TYPE", length = 10)
+    private String itemGroupType;
 
     // Trạng thái: (0: Deactive, 1: Active, -9: Delete)
     @Basic
@@ -68,7 +73,7 @@ public class McasUomEntity implements Serializable {
     @Column(name = "UPDATEDBY")
     private String updatedBy;
 
-    public McasUomEntity cloneNotRef() {
+    public McasItemGroupEntity cloneNotRef() {
         return SerializationUtils.clone(this);
     }
 

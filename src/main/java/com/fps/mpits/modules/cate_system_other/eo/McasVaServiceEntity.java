@@ -1,7 +1,6 @@
-package com.fps.mpits.modules.cate_rate_postal.eo;
+package com.fps.mpits.modules.cate_system_other.eo;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
-import com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility;
 import com.fps.mpits.logging.AuditingEntityListener;
 import com.fps.mpits.util.Constant;
 import lombok.AllArgsConstructor;
@@ -21,14 +20,13 @@ import java.util.Date;
 
 @EntityListeners(AuditingEntityListener.class)
 @Entity
-@Table(name = Constant.EntityTable.MCAS_SERVICE_VAS)
+@Table(name = Constant.EntityTable.MCAS_VA_SERVICE)
 @Accessors(fluent = true)
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@JsonAutoDetect(fieldVisibility = Visibility.ANY)
-@IdClass(McasServiceVasEntityId.class)
-public class McasServiceVasEntity implements Serializable {
+@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
+public class McasVaServiceEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -38,15 +36,29 @@ public class McasServiceVasEntity implements Serializable {
     @Column(name = "VA_SERVICE_ID", length = 100, nullable = false)
     private String vaServiceId;
 
-    // Mã sản phẩm dịch vụ
+    // Tên dịch vụ GTGT
     @Basic
-    @Id
-    @Column(name = "MAIL_SERVICE_ID", length = 10, nullable = false)
-    private String mailServiceId;
+    @Column(name = "VA_SERVICE_NAME", length = 100, nullable = false)
+    private String vaServiceName;
+
+    // Mã nhóm cước
+    @Basic
+    @Column(name = "FEE_TYPE_GROUP_ID", length = 20, nullable = false)
+    private String feeTypeGroupId;
+
+    // Ký hiệu
+    @Basic
+    @Column(name = "SYMBOL", length = 32)
+    private String symbol;
+
+    // Sự vụ
+    @Basic
+    @Column(name = "INCIDENT")
+    private Integer incident;
 
     // Trạng thái: (0: Deactive, 1: Active, -9: Delete)
     @Basic
-    @Column(name = "STATUS", length = 1)
+    @Column(name = "STATUS", length = 1, nullable = false)
     private int status;
 
     // Ngày tạo
@@ -71,7 +83,7 @@ public class McasServiceVasEntity implements Serializable {
     @Column(name = "UPDATEDBY")
     private String updatedBy;
 
-    public McasServiceVasEntity cloneNotRef() {
+    public McasVaServiceEntity cloneNotRef() {
         return SerializationUtils.clone(this);
     }
 

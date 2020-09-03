@@ -10,7 +10,7 @@
     </parent>
     <groupId>com.fps.mpits</groupId>
     <artifactId>mpits_sync_data</artifactId>
-    <version>0.0.1</version>
+    <version>0.0.8</version>
     <packaging>jar</packaging>
     <name>mpits_sync_data</name>
     <description>Mpits Sync Data project for Spring Boot of HieuDT28 - (Hiếu Boy)</description>
@@ -147,6 +147,6 @@
         </plugins>
     </build>
 
-    <!--mvn deploy:deploy-file -DgroupId=com.fps.mpits -DartifactId=mpits_sync_data -Dversion=0.0.1 -Dpackaging=jar -Dfile=mpits_sync_data-0.0.1.jar -DrepositoryId=maven-releases -Durl=http://10.14.190.2:8081/repository/maven-releases-->
+    <!--mvn deploy:deploy-file -DgroupId=com.fps.mpits -DartifactId=mpits_sync_data -Dversion=0.0.8 -Dpackaging=jar -Dfile=mpits_sync_data-0.0.8.jar -DrepositoryId=maven-releases -Durl=http://10.14.190.2:8081/repository/maven-releases-->
 
 </project>

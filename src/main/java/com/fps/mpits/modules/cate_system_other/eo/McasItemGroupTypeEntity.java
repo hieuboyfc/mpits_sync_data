@@ -1,4 +1,4 @@
-package com.fps.mpits.modules.cate_rate_postal.eo;
+package com.fps.mpits.modules.cate_system_other.eo;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility;
@@ -16,19 +16,19 @@ import java.util.Date;
 
 /**
  * @author HieuDT28 - (Hiếu Boy)
- * created 19/05/2020 - 17:30
+ * created 13/07/2020 - 17:17
  */
 
 @EntityListeners(AuditingEntityListener.class)
 @Entity
-@Table(name = Constant.EntityTable.MCAS_ITEM_GROUP_SERVICE)
+@Table(name = Constant.EntityTable.MCAS_ITEM_GROUP_TYPE)
 @Accessors(fluent = true)
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
 @JsonAutoDetect(fieldVisibility = Visibility.ANY)
-@IdClass(McasItemGroupServiceEntityId.class)
-public class McasItemGroupServiceEntity implements Serializable {
+@IdClass(McasItemGroupTypeEntityId.class)
+public class McasItemGroupTypeEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -38,11 +38,11 @@ public class McasItemGroupServiceEntity implements Serializable {
     @Column(name = "ITEM_GROUP_ID", length = 20, nullable = false)
     private String itemGroupId;
 
-    // Mã sản phẩm dịch vụ
+    // Mã loại hàng
     @Basic
     @Id
-    @Column(name = "MAIL_SERVICE_ID", length = 10, nullable = false)
-    private String mailServiceId;
+    @Column(name = "ITEM_TYPE_ID", length = 20, nullable = false)
+    private String itemTypeId;
 
     // Trạng thái: (0: Deactive, 1: Active, -9: Delete)
     @Basic
@@ -71,8 +71,7 @@ public class McasItemGroupServiceEntity implements Serializable {
     @Column(name = "UPDATEDBY")
     private String updatedBy;
 
-    public McasItemGroupServiceEntity cloneNotRef() {
+    public McasItemGroupTypeEntity cloneNotRef() {
         return SerializationUtils.clone(this);
     }
-
 }

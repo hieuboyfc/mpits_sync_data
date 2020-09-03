@@ -7,7 +7,7 @@ import com.fps.mpits.modules.app.eo.McasListApproveDataEntity;
 import com.fps.mpits.modules.auth.eo.*;
 import com.fps.mpits.modules.cate.eo.*;
 import com.fps.mpits.modules.cate.repo.IMcasAdministrativeUnitRepository;
-import com.fps.mpits.modules.cate_rate_postal.eo.*;
+import com.fps.mpits.modules.cate_system_other.eo.*;
 import com.fps.mpits.request.RequestClientInfo;
 import com.fps.mpits.request.RequestScope;
 import com.fps.mpits.response.SyncResponse;
