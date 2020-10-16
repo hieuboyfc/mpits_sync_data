@@ -57,6 +57,11 @@ public class McasUserEntity implements Serializable {
     @Column(name = "EMPLOYEE_CODE")
     private String employeeCode;
 
+    // Mã đơn vị
+    @Basic
+    @Column(name = "ORG_CODE")
+    private String orgCode;
+
     // Ngày, giờ lần thay đổi mật khẩu gần nhất
     @Basic
     @Column(name = "LAST_CHANGE_PASS_DT")
