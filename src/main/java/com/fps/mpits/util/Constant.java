@@ -125,6 +125,7 @@ public class Constant {
         // BEGIN NUMBER
         public static final int NUMBER_I_0 = 0;
         public static final int NUMBER_I_1 = 1;
+        public static final int NUMBER_I_99 = 99;
         // END NUMBER
 
         private Number() {

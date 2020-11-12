@@ -75,7 +75,8 @@ public class SyncDataRestController {
             logger.error(Constant.ExceptionText.NOT_FOUND_LIST_APPROVE_DATA);
             throw new BadRequestException(Constant.ExceptionText.NOT_FOUND_LIST_APPROVE_DATA);
         }
-
+        // Random 2 số (từ 0 -> đến 99) để cộng vào ID
+        Integer random = (int) Math.floor((Math.random() * Constant.Number.NUMBER_I_99));
         Object objEntity;
         List<SyncResponse> responses = new ArrayList<>();
         for (McasListApproveDataEntity item : lstMcasListApproveDataEntity) {
@@ -137,6 +138,7 @@ public class SyncDataRestController {
                     break;
                 case Constant.EntityTable.MCAS_EXCHANGE_RATE:
                     objEntity = Jackson.getInstance().string2Object(item.listData(), McasExchangeRateEntity.class);
+                    ((McasExchangeRateEntity) objEntity).id(((McasExchangeRateEntity) objEntity).id() + random);
                     break;
                 case Constant.EntityTable.MCAS_POSTOFFICE_MAPPING:
                     objEntity = Jackson.getInstance().string2Object(item.listData(), McasPostOfficeMappingEntity.class);
@@ -195,13 +197,13 @@ public class SyncDataRestController {
 
             responses.add(syncResponse);
             updateLocationByParent(item.listType(), objEntity);
-            if (logger.isWarnEnabled()) {
+            /*if (logger.isWarnEnabled()) {
                 logger.warn(Constant.ExceptionText.MESSAGE_WARN + Constant.ExceptionText.MESSAGE_WARN);
                 logger.warn(String.format(Constant.ExceptionText.PUSH_DATA_TABLE_SUCCESS, item.listType(), item.id(), item.listAction()));
                 logger.warn(String.format(Constant.ExceptionText.DATA_SYNC, objEntity));
                 logger.warn(Constant.ExceptionText.MESSAGE_WARN + Constant.ExceptionText.MESSAGE_WARN);
-            }
-            System.out.println(String.format(Constant.ExceptionText.PUSH_DATA_TABLE_SUCCESS, item.listType(), item.id(), item.listAction()));
+            }*/
+            logger.warn(String.format(Constant.ExceptionText.PUSH_DATA_TABLE_SUCCESS, item.listType(), item.id(), item.listAction()));
 
             // Lấy thông tin từ request để lưu vào bảng MCAS_AUDIT_LOG
             RequestScope requestScope = BeanUtil.getBean(RequestScope.class);

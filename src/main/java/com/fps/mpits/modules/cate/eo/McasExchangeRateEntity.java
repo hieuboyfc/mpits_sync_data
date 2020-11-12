@@ -33,10 +33,8 @@ public class McasExchangeRateEntity implements Serializable {
     // ID tự tăng
     @Basic
     @Id
-    @SequenceGenerator(name = "SEQ_MCAS_EXCHANGE_RATE", sequenceName = "SEQ_MCAS_EXCHANGE_RATE", allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_MCAS_EXCHANGE_RATE")
     @Column(name = "ID", nullable = false, updatable = false)
-    private long id;
+    private Long id;
 
     // Mã nguyên tệ
     @Basic
@@ -62,7 +60,7 @@ public class McasExchangeRateEntity implements Serializable {
     // Trạng thái: (0: Deactive, 1: Active, -9: Delete)
     @Basic
     @Column(name = "STATUS")
-    private int status;
+    private Integer status;
 
     public McasExchangeRateEntity cloneNotRef() {
         return SerializationUtils.clone(this);

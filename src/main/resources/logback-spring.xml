@@ -18,7 +18,7 @@
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <fileNamePattern>${LOG_PATH}/%d{dd-MM-yyyy}/${QTTT_SYNC_DATA}.${FILE_TYPE}</fileNamePattern>
             <maxHistory>100</maxHistory>
-            <totalSizeCap>10GB</totalSizeCap>
+            <totalSizeCap>1GB</totalSizeCap>
         </rollingPolicy>
         <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
             <Pattern>
@@ -28,7 +28,7 @@
     </appender>
 
     <!-- QTTT Sync Data Logger -->
-    <logger name="${QTTT_RESPONSE}" additivity="false" level="info">
+    <logger name="${QTTT_RESPONSE}" additivity="false" level="warn">
         <appender-ref ref="HIEUDT28_SYNC_DATA_APPENDER"/>
     </logger>
 
