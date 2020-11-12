@@ -76,7 +76,7 @@ public class SyncDataRestController {
             throw new BadRequestException(Constant.ExceptionText.NOT_FOUND_LIST_APPROVE_DATA);
         }
         // Random 2 số (từ 0 -> đến 99) để cộng vào ID
-        Integer random = (int) Math.floor((Math.random() * Constant.Number.NUMBER_I_99));
+        // Integer random = (int) Math.floor((Math.random() * Constant.Number.NUMBER_I_99));
         Object objEntity;
         List<SyncResponse> responses = new ArrayList<>();
         for (McasListApproveDataEntity item : lstMcasListApproveDataEntity) {
@@ -138,7 +138,7 @@ public class SyncDataRestController {
                     break;
                 case Constant.EntityTable.MCAS_EXCHANGE_RATE:
                     objEntity = Jackson.getInstance().string2Object(item.listData(), McasExchangeRateEntity.class);
-                    ((McasExchangeRateEntity) objEntity).id(((McasExchangeRateEntity) objEntity).id() + random);
+                    // ((McasExchangeRateEntity) objEntity).id(((McasExchangeRateEntity) objEntity).id() + random);
                     break;
                 case Constant.EntityTable.MCAS_POSTOFFICE_MAPPING:
                     objEntity = Jackson.getInstance().string2Object(item.listData(), McasPostOfficeMappingEntity.class);
